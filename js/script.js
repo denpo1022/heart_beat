@@ -120,16 +120,16 @@ function init(a) {
 const beat = { a: 0 };
 gsap
   .timeline({
-    repeat: -1,
-    repeatDelay: 0.3,
+    repeat: -1, // 是否重複跳動，-1=無限重複，0=沒有重複，>0則根據正整數決定重複次數
+    repeatDelay: 0,
   })
-  .to(beat, {
-    a: 0.5,
-    duration: 0.6,
+  .to(beat, { // 跳動渲染
+    a: -0.5, // 跳動幅度的最大值 (+/-號控制方向)
+    duration: 0.6, // 滾輪控制這個浮點數大小便能控制心跳速度
     ease: "power2.in",
   })
-  .to(beat, {
-    a: 0.0,
+  .to(beat, { // 收合渲染
+    a: 0.0, // 必須為 0.0 不然渲染物件不會回到初始位置造成視覺上有斷裂不連續的感覺
     duration: 0.6,
     ease: "power3.out",
   });
@@ -188,7 +188,7 @@ function render(a) {
   }
   heart.geometry.attributes.position.needsUpdate = true;
 
-  controls.update();
+//   controls.update();
   renderer.render(scene, camera);
 }
 
